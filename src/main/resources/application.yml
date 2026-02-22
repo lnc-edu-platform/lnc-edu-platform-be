@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/education?serverTimezone=Asia/Seoul&characterEncoding=utf8
+    username: root
+    password: seoung1029
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+app:
+  jwt:
+    secret: "THIS_IS_SECRET_KEY_CHANGE_IT_1234567890"
+    expiration: 7200000
+
