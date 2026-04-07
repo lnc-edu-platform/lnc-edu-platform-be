@@ -39,3 +39,4 @@ out/
 # local config
 src/main/resources/application-local.yml
 .env.gemini/
+.gemini/
