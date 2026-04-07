@@ -38,7 +38,8 @@ public class AuthService {
             throw new IllegalArgumentException("Login ID already exists: " + request.getLoginId());
         }
         
-        User newUser = new User(request.getLoginId(), passwordEncoder.encode(request.getPassword()), request.getName(), request.getStudentId(), RoleType.USER);
+        String encodedPassword = passwordEncoder.encode(request.getPassword());
+        User newUser = new User(request.getLoginId(), encodedPassword, request.getName(), request.getStudentId(), RoleType.USER);
 
         return userRepository.save(newUser);
     }
