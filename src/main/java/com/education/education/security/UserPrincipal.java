@@ -12,10 +12,12 @@ import java.util.Collections;
 public class UserPrincipal implements UserDetails {
     private final String loginId;
     private final String role;
+    private final String password;
 
-    public UserPrincipal(String loginId, String role) {
+    public UserPrincipal(String loginId, String role, String password) {
         this.loginId = loginId;
         this.role = role;
+        this.password = password;
     }
 
     @Override
@@ -23,7 +25,7 @@ public class UserPrincipal implements UserDetails {
         return Collections.singletonList(new SimpleGrantedAuthority(role.startsWith("ROLE_") ? role : "ROLE_" + role));
     }
 
-    @Override public String getPassword() { return null; }
+    @Override public String getPassword() { return password; }
     @Override public String getUsername() { return loginId; }
     @Override public boolean isAccountNonExpired() { return true; }
     @Override public boolean isAccountNonLocked() { return true; }

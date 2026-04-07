@@ -29,9 +29,7 @@ Content-Type: application/json
 }
 
 > {%
-    // 참고: AI가 짠 구조에 따라 response.body.data.accessToken 일 수도 있습니다.
-    // 에러가 나면 응답 JSON 구조를 보고 맞춰주세요!
-    client.global.set("auth_token", response.body.data.token);
+    client.global.set("auth_token", response.body.data.accessToken);
 %}
 
 

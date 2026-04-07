@@ -56,7 +56,7 @@ public class JwtTokenProvider {
         String role = claims.get("role", String.class);
         List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(role));
         
-        UserPrincipal principal = new UserPrincipal(loginId, role);
+        UserPrincipal principal = new UserPrincipal(loginId, role, null);
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 
