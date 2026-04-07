@@ -5,16 +5,10 @@ import com.education.education.comment.domain.Comment;
 import com.education.education.post.domain.Post;
 import com.education.education.reflection.domain.Reflection;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "users")
 public class User extends BaseTimeEntity {
 
@@ -26,7 +20,7 @@ public class User extends BaseTimeEntity {
     private String loginId;
 
     @Column(nullable = false)
-    private String passwordHash;
+    private String password;
 
     @Column(nullable = false, length = 50)
     private String name;
@@ -34,32 +28,34 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false, unique = true, length = 20)
     private String studentId;
 
-    @Column(nullable = true)
-    private Integer grade;
-
-    @Column(nullable = true, length = 100)
-    private String major;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private RoleType role;
 
-    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "author")
     private List<Post> posts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "author")
     private List<Reflection> reflections = new ArrayList<>();
 
-    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
-    private List<Comment> comments = new ArrayList<>();
-
-    public User(String loginId, String passwordHash, String name, String studentId, Integer grade, String major, RoleType role) {
+    public User() {}
+    public User(String loginId, String password, String name, String studentId, RoleType role) {
         this.loginId = loginId;
-        this.passwordHash = passwordHash;
+        this.password = password;
         this.name = name;
         this.studentId = studentId;
-        this.grade = grade;
-        this.major = major;
         this.role = role;
     }
+
+    public Long getId() { return id; }
+    public String getLoginId() { return loginId; }
+    public void setLoginId(String loginId) { this.loginId = loginId; }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getStudentId() { return studentId; }
+    public void setStudentId(String studentId) { this.studentId = studentId; }
+    public RoleType getRole() { return role; }
+    public void setRole(RoleType role) { this.role = role; }
 }

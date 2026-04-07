@@ -1,0 +1,56 @@
+### 전역 변수 설정 (서버 주소)
+@host = http://localhost:8080
+
+
+### -----------------------------------
+### 1. 회원가입 (Signup)
+### -----------------------------------
+POST {{host}}/api/auth/signup
+Content-Type: application/json
+
+{
+  "loginId": "testUser",
+  "password": "testPassword123!",
+  "studentId": "2024111111",
+  "name": "테스트학생"
+}
+
+
+### -----------------------------------
+### 2. 로그인 (Login) & 토큰 탈취(?)
+### -----------------------------------
+# 로그인이 성공하면 자동으로 응답에서 토큰을 빼서 'auth_token'이라는 변수에 저장합니다.
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "loginId": "testUser",
+  "password": "testPassword123!"
+}
+
+> {%
+    // 참고: AI가 짠 구조에 따라 response.body.data.accessToken 일 수도 있습니다.
+    // 에러가 나면 응답 JSON 구조를 보고 맞춰주세요!
+    client.global.set("auth_token", response.body.data.token);
+%}
+
+
+### -----------------------------------
+### 3. 회고 작성 (Create Reflection) - 인증 필요
+### -----------------------------------
+# 위에서 저장한 토큰을 Authorization 헤더에 자동으로 넣어서 찔러봅니다.
+POST {{host}}/api/reflections
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "title": "첫 봉사활동 회고",
+  "content": "오늘은 교육 플랫폼에 처음 로그인해서 회고록을 작성해 보았다. 아주 잘 작동한다!"
+}
+
+
+### -----------------------------------
+### 4. 내 회고 목록 조회 (Read)
+### -----------------------------------
+GET {{host}}/api/reflections
+Authorization: Bearer {{auth_token}}

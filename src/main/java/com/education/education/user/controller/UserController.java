@@ -15,8 +15,8 @@ public class UserController {
     @GetMapping("/me")
     public Map<String, Object> me(@AuthenticationPrincipal UserPrincipal principal){
         return Map.of(
-                "userId",principal.getUserId(),
-                "email",principal.getEmail()
+                "userId",principal.getLoginId(),
+                "role",principal.getRole()
         );
     }
 }
