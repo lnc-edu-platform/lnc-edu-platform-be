@@ -1,17 +1,19 @@
 package com.education.education.auth.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.education.education.user.dto.UserResponse;
 
-@Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class LoginResponse {
     private String accessToken;
     private String refreshToken;
-    // Optional: You can also return UserDetails here if needed
     private UserResponse user;
+
+    public LoginResponse(String accessToken, String refreshToken, UserResponse user) {
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
+        this.user = user;
+    }
+
+    public String getAccessToken() { return accessToken; }
+    public String getRefreshToken() { return refreshToken; }
+    public UserResponse getUser() { return user; }
 }

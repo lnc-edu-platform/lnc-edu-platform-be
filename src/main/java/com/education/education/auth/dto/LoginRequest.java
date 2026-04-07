@@ -1,20 +1,16 @@
 package com.education.education.auth.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
 
-import javax.validation.constraints.NotBlank;
-
-@Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class LoginRequest {
-    @NotBlank(message = "Login ID cannot be blank")
+    @NotBlank
     private String loginId;
-
-    @NotBlank(message = "Password cannot be blank")
+    @NotBlank
     private String password;
+
+    public LoginRequest() {}
+    public String getLoginId() { return loginId; }
+    public void setLoginId(String loginId) { this.loginId = loginId; }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 }
