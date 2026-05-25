@@ -47,4 +47,11 @@ public class Post extends BaseTimeEntity {
         this.isAnonymous = isAnonymous;
         this.author = author;
     }
+
+    public void update(String title, String content, String category, Boolean isAnonymous) {
+        this.title = title;
+        this.content = content;
+        this.category = category;
+        this.isAnonymous = isAnonymous;
+    }
 }
