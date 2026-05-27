@@ -54,7 +54,8 @@ public class JwtTokenProvider {
         Claims claims = Jwts.parser().verifyWith(getSecretKey()).build().parseSignedClaims(token).getPayload();
         String loginId = claims.getSubject();
         String role = claims.get("role", String.class);
-        List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(role));
+        List<SimpleGrantedAuthority> authorities = Collections.singletonList(
+                new SimpleGrantedAuthority(role.startsWith("ROLE_") ? role : "ROLE_" + role));
         
         UserPrincipal principal = new UserPrincipal(loginId, role, null);
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
