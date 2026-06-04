@@ -93,6 +93,8 @@ public class PostService {
                 post.getAuthor().getLoginId(),
                 post.getAuthor().getName(),
                 post.getAuthor().getStudentId(),
+                post.getAuthor().getPhone(),
+                post.getAuthor().getMajor(),
                 post.getAuthor().getRole()
         );
         return new PostResponse(

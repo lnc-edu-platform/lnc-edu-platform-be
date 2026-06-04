@@ -28,6 +28,12 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false, unique = true, length = 20)
     private String studentId;
 
+    @Column(length = 20)
+    private String phone;
+
+    @Column(length = 100)
+    private String major;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private RoleType role;
@@ -56,6 +62,10 @@ public class User extends BaseTimeEntity {
     public void setName(String name) { this.name = name; }
     public String getStudentId() { return studentId; }
     public void setStudentId(String studentId) { this.studentId = studentId; }
+    public String getPhone() { return phone; }
+    public void setPhone(String phone) { this.phone = phone; }
+    public String getMajor() { return major; }
+    public void setMajor(String major) { this.major = major; }
     public RoleType getRole() { return role; }
     public void setRole(RoleType role) { this.role = role; }
 }

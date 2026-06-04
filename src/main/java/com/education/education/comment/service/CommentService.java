@@ -82,6 +82,8 @@ public class CommentService {
                 comment.getAuthor().getLoginId(),
                 comment.getAuthor().getName(),
                 comment.getAuthor().getStudentId(),
+                comment.getAuthor().getPhone(),
+                comment.getAuthor().getMajor(),
                 comment.getAuthor().getRole()
         );
         Long postId = comment.getPost() != null ? comment.getPost().getId() : null;

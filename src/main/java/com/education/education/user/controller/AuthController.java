@@ -23,7 +23,7 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<ApiResponse<UserResponse>> signup(@Valid @RequestBody SignupRequest request) {
         User newUser = authService.signup(request);
-        UserResponse userResponse = new UserResponse(newUser.getLoginId(), newUser.getName(), newUser.getStudentId(), newUser.getRole());
+        UserResponse userResponse = new UserResponse(newUser.getLoginId(), newUser.getName(), newUser.getStudentId(), newUser.getPhone(), newUser.getMajor(), newUser.getRole());
         return ResponseEntity.ok(ApiResponse.ofSuccess(userResponse, "User registered successfully"));
     }
 

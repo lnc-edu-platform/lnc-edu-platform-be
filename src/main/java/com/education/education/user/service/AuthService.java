@@ -40,6 +40,8 @@ public class AuthService {
         
         String encodedPassword = passwordEncoder.encode(request.getPassword());
         User newUser = new User(request.getLoginId(), encodedPassword, request.getName(), request.getStudentId(), RoleType.USER);
+        newUser.setPhone(request.getPhone());
+        newUser.setMajor(request.getMajor());
 
         return userRepository.save(newUser);
     }
@@ -57,7 +59,7 @@ public class AuthService {
         User currentUser = userRepository.findByLoginId(userPrincipal.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        UserResponse userResponse = new UserResponse(currentUser.getLoginId(), currentUser.getName(), currentUser.getStudentId(), currentUser.getRole());
+        UserResponse userResponse = new UserResponse(currentUser.getLoginId(), currentUser.getName(), currentUser.getStudentId(), currentUser.getPhone(), currentUser.getMajor(), currentUser.getRole());
 
         return new LoginResponse(accessToken, refreshToken, userResponse);
     }

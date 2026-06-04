@@ -76,6 +76,8 @@ public class NoticeService {
                 notice.getAuthor().getLoginId(),
                 notice.getAuthor().getName(),
                 notice.getAuthor().getStudentId(),
+                notice.getAuthor().getPhone(),
+                notice.getAuthor().getMajor(),
                 notice.getAuthor().getRole()
         );
         return new NoticeResponse(

@@ -90,6 +90,8 @@ public class ReflectionService {
                 reflection.getAuthor().getLoginId(),
                 reflection.getAuthor().getName(),
                 reflection.getAuthor().getStudentId(),
+                reflection.getAuthor().getPhone(),
+                reflection.getAuthor().getMajor(),
                 reflection.getAuthor().getRole()
         );
         return new ReflectionResponse(

@@ -2,10 +2,9 @@ package com.education.education.user.controller;
 
 import com.education.education.common.ApiResponse;
 import com.education.education.security.UserPrincipal;
-import com.education.education.user.domain.User;
+import com.education.education.user.dto.UpdateProfileRequest;
 import com.education.education.user.dto.UserResponse;
-import com.education.education.user.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
+import com.education.education.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,13 +15,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/users")
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @GetMapping("/me")
-    public ResponseEntity<ApiResponse<UserResponse>> me(@AuthenticationPrincipal UserPrincipal principal) {
-        User user = userRepository.findByLoginId(principal.getLoginId())
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
-        UserResponse response = new UserResponse(user.getLoginId(), user.getName(), user.getStudentId(), user.getRole());
+    public ResponseEntity<ApiResponse<UserResponse>> getProfile(@AuthenticationPrincipal UserPrincipal principal) {
+        UserResponse response = userService.getProfile(principal.getLoginId());
+        return ResponseEntity.ok(ApiResponse.ofSuccess(response));
+    }
+
+    @PutMapping("/me")
+    public ResponseEntity<ApiResponse<UserResponse>> updateProfile(
+            @AuthenticationPrincipal UserPrincipal principal,
+            @RequestBody UpdateProfileRequest request) {
+        UserResponse response = userService.updateProfile(principal.getLoginId(), request);
         return ResponseEntity.ok(ApiResponse.ofSuccess(response));
     }
 }
